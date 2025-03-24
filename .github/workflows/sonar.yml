@@ -31,6 +31,12 @@ jobs:
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
           npm install
 
+      - name: Upload linter report
+        uses: actions/upload-artifact@v3
+        with:
+          name: linter-report
+          path: eslint-report.json
+
       - name: Run linter
         run: npm run lint -- --max-warnings=0
 
