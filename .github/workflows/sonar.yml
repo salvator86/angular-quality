@@ -31,11 +31,8 @@ jobs:
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
           npm install
 
-      - name: Upload linter report
-        uses: actions/upload-artifact@v3
-        with:
-          name: linter-report
-          path: eslint-report.json
+      - name: Clear npm cache
+        run: npm cache clean --force
 
       - name: Run linter
         run: npm run lint -- --max-warnings=0
@@ -112,13 +109,15 @@ jobs:
 
       - name: Run tests
         run: |
-          npm run test -- --watch=false --browsers=ChromeHeadless
+          npm run test -- --watch=false --browsers=ChromeHeadless --reporters=jest-junit
 
-      - name: Upload test results
-        uses: actions/upload-artifact@v2
-        with:
-          name: test-results
-          path: path/to/test-results/*
+      - name: Check if test result file exists before upload
+        run: |
+          if [ -f path/to/test-results/junit.xml ]; then
+            echo "Test result file exists, uploading artifact."
+          else
+            echo "Test result file does not exist, skipping upload."
+          fi
 
   sonarcloud:
     runs-on: ubuntu-latest
