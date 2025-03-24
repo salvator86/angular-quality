@@ -105,7 +105,8 @@ jobs:
         run: npm install
 
       - name: Run tests
-        run: npm test
+        run: |
+          npm run test -- --watch=false --browsers=ChromeHeadless
 
   sonarcloud:
     runs-on: ubuntu-latest
