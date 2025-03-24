@@ -18,11 +18,14 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '22.14.0'  # або інша версія Node.js
+          node-version: '22'  # або інша версія Node.js
 
       - name: Install dependencies
         run: |
           npm install
+
+      - name: Authenticate with npm
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       - name: Run tests
         run: |
