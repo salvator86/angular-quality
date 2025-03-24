@@ -1,4 +1,4 @@
-name: SonarCloud Analysis
+name: CI/CD Pipeline
 
 on:
   push:
@@ -21,7 +21,9 @@ jobs:
           node-version: '22'
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          npm install
 
       - name: Run linter
         run: npm run lint -- --max-warnings=0
@@ -38,7 +40,9 @@ jobs:
           node-version: '22'
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          npm install
 
       - name: Run dependency audit
         run: npm audit --audit-level=high
@@ -55,10 +59,14 @@ jobs:
           node-version: '22'
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          npm install
 
       - name: Run build
         run: npm run build
+
+
   sonarcloud:
     runs-on: ubuntu-latest
     steps:
