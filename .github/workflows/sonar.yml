@@ -108,6 +108,12 @@ jobs:
         run: |
           npm run test -- --watch=false --browsers=ChromeHeadless
 
+      - name: Upload test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results
+          path: path/to/test-results/*
+
   sonarcloud:
     runs-on: ubuntu-latest
     steps:
