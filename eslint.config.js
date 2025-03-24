@@ -10,7 +10,7 @@ module.exports = tseslint.config(
       eslint.configs.recommended,
       ...tseslint.configs.recommended,
       ...tseslint.configs.stylistic,
-      ...angular.configs.tsRecommended,
+      ...angular.configs.tsRecommended
     ],
     processor: angular.processInlineTemplates,
     rules: {
@@ -30,7 +30,10 @@ module.exports = tseslint.config(
           style: "kebab-case",
         },
       ],
-    },
+      "object-curly-spacing": ["error", "always"],
+      quotes: ["error", "single"],
+      "comma-dangle": ["error", "never"]
+    }
   },
   {
     files: ["**/*.html"],

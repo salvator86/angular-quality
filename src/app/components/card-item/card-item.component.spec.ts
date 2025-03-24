@@ -14,6 +14,12 @@ describe('CardItemComponent', () => {
 
     fixture = TestBed.createComponent(CardItemComponent);
     component = fixture.componentInstance;
+
+    Object.defineProperty(component, 'card', { get: () => {
+       return { name: 'Sasha', age: 5 }
+      }
+    })
+
     fixture.detectChanges();
   });
 

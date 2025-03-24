@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
+import { CardsListComponent } from './components/cards-list/cards-list.component';
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  imports: [CardsListComponent],
   templateUrl: './app.component.html',
+  standalone: true,
   styleUrl: './app.component.scss'
 })
 export class AppComponent {

@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-card-item',
-  imports: [],
   templateUrl: './card-item.component.html',
+  standalone: true,
   styleUrl: './card-item.component.scss'
 })
 export class CardItemComponent {
-
+  @Input() card: { name: string; age: number };
 }
